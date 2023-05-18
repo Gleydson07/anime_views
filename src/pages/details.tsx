@@ -1,6 +1,6 @@
 import {
   Container
-} from './styles';
+} from '../styles/details';
 
 export default function Details() {
 

@@ -1,6 +1,6 @@
 import {
   Container
-} from './styles';
+} from '../styles/home';
 
 export default function Home() {
 
