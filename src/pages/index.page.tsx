@@ -14,20 +14,20 @@ export const getStaticProps:GetStaticProps = async () => {
     
     const animes = data.data.map((anime: any) => ({
       id: anime.id,
-      slug: anime.attributes.slug,
       title: anime.attributes.canonicalTitle,
-      description: anime.attributes.description,
       img: anime.attributes.posterImage.large,
       rating: anime.attributes.averageRating,
       ageRatingGuide: anime.attributes.ageRatingGuide,
-      youtubeVideoId: anime.attributes.youtubeVideoId,
-      categories: data.included
-        .filter((included: any) => anime.relationships.categories.data
-        .map((category: any) => category.id).includes(included.id))
-        .map((category: any) => ({
-          id: category.id,
-          title: category.attributes.title,
-        })),
+      // slug: anime.attributes.slug,
+      // description: anime.attributes.description,
+      // youtubeVideoId: anime.attributes.youtubeVideoId,
+      // categories: data.included
+      //   .filter((included: any) => anime.relationships.categories.data
+      //   .map((category: any) => category.id).includes(included.id))
+      //   .map((category: any) => ({
+      //     id: category.id,
+      //     title: category.attributes.title,
+      //   })),
     }))
 
     return {
