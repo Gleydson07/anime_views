@@ -1,10 +1,10 @@
 import React from 'react';
 import Card from '@/components/card';
-import Header from '@/components/header';
 import { Container } from '@/styles/grid';
 import { ContainerHome } from './styles';
 import Banner from '@/components/banner';
 import { GetStaticProps } from 'next';
+import AnimesService from '@/api/AnimesService';
 
 const cardsItens = [
   {
@@ -76,6 +76,9 @@ export default function Home() {
 }
 
 export const getStaticProps: GetStaticProps = async () => {
+  const animes = await AnimesService.getAnimes();
+  console.log({animes});
+  
   return {
     revalidate: 60 * 60 * 24, // 24 hours
     props: {}
