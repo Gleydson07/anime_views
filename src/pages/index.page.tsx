@@ -10,12 +10,30 @@ export default function Home({animes}: any) {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const response = await api.get("/anime");
+    const {data} = await api.get("/anime?include=categories&page[limit]=18");
+    
+    const animes = data.data.map((anime: any) => ({
+      id: anime.id,
+      slug: anime.attributes.slug,
+      title: anime.attributes.canonicalTitle,
+      description: anime.attributes.description,
+      img: anime.attributes.posterImage.large,
+      rating: anime.attributes.averageRating,
+      ageRatingGuide: anime.attributes.ageRatingGuide,
+      youtubeVideoId: anime.attributes.youtubeVideoId,
+      categories: data.included
+        .filter((included: any) => anime.relationships.categories.data
+        .map((category: any) => category.id).includes(included.id))
+        .map((category: any) => ({
+          id: category.id,
+          title: category.attributes.title,
+        })),
+    }))
 
     return {
       revalidate: 60 * 5, // 5 minutes
       props: {
-        animes: response.data
+        animes: animes
       }
     }
   }
