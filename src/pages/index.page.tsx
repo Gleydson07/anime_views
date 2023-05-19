@@ -9,14 +9,14 @@ export default function Home({animes}: any) {
   )
 }
 
-export const getStaticProps:GetStaticProps = async () => {
-    const animes = await AnimeService.getAnimes();
-    console.log(animes)
+// export const getStaticProps:GetStaticProps = async () => {
+//     const animes = await AnimeService.getAnimes();
+//     console.log(animes)
     
-    return {
-      revalidate: 60 * 5, // 5 minutes
-      props: {
-        animes
-      }
-    }
-  }
+//     return {
+//       revalidate: 60 * 5, // 5 minutes
+//       props: {
+//         animes
+//       }
+//     }
+//   }
