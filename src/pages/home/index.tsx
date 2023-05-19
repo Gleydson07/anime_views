@@ -62,7 +62,7 @@ const cardsItens = [
 ]
 
 export default function Home({animes}: any) {
-  console.log(animes)
+  console.log({animes});
 
   return (
     <ContainerHome>

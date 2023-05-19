@@ -1,7 +1,7 @@
 import React from 'react';
 import { GetStaticProps } from 'next';
 import HomePage from '@/pages/home';
-import * as AnimeService from '@/api/AnimesService';
+import api from '@/api';
 
 export default function Home({animes}: any) {
   return (
@@ -10,13 +10,12 @@ export default function Home({animes}: any) {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const animes = await AnimeService.getAnimes();
-    console.log(animes)
-    
+    const response = await api.get("/anime");
+
     return {
-      revalidate: 60 * 5, // 5 minutes
+    //   revalidate: 60 * 5, // 5 minutes
       props: {
-        animes
+        animes: response.data
       }
     }
   }
