@@ -4,6 +4,7 @@ import Header from '@/components/header';
 import { Container } from '@/styles/grid';
 import { ContainerHome } from './styles';
 import Banner from '@/components/banner';
+import { GetStaticProps } from 'next';
 
 const cardsItens = [
   {
@@ -72,4 +73,11 @@ export default function Home() {
       </Container>
     </ContainerHome>
   )
+}
+
+export const getStaticProps: GetStaticProps = async () => {
+  return {
+    revalidate: 60 * 60 * 24, // 24 hours
+    props: {}
+  }
 }
