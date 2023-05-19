@@ -1,14 +1,17 @@
 import React from 'react';
+import { GetStaticPaths, GetStaticProps } from 'next';
 import Banner from '@/components/banner';
 import { Wrapper } from './styles';
 import { Container } from '@/styles/grid';
 import { Button } from 'antd';
 import Tags from '@/components/tags';
 import StarRating from '@/components/starRating';
+import api from '@/api';
 
 const tags = ["Artes marciais", "Aventura", "Shounen"]
 
-export default function Details() {
+export default function Details({anime, data}: any) {
+  console.log(anime, data)
   return (
     <Container>
       <Banner img='https://image.tmdb.org/t/p/original/erMkdaaYEyUqCSUEdYtqBtl63rK.jpg' description='imagem de fundo do dragon ball gt' />
@@ -48,4 +51,50 @@ export default function Details() {
 
     </Container>
   )
+}
+
+export const getStaticPaths: GetStaticPaths = async () => {
+    return {
+        paths: [],
+        fallback: 'blocking'
+    }
+}
+
+export const getStaticProps: GetStaticProps = async ({params}) => {
+  const id = params?.slug;
+
+  if (!id) {
+    return {
+      notFound: true,
+    }
+  }
+
+  const {data} = await api.get(`/anime/${id}?include=categories`);
+    
+    const anime = {
+      id: data.data.id,
+      title: data.data.attributes.canonicalTitle,
+      img: data.data.attributes.posterImage.large,
+      banner: data.data.attributes.coverImage.large,
+      rating: data.data.attributes.averageRating,
+      ageRatingGuide: data.data.attributes.ageRatingGuide,
+      slug: data.data.attributes.slug,
+      description: data.data.attributes.description,
+      youtubeVideoId: data.data.attributes.youtubeVideoId,
+      // categories: data.data.included
+      //   .filter((included: any) => data.data.relationships.categories.data
+      //   .map((category: any) => category.id).includes(included.id))
+      //   .map((category: any) => ({
+      //     id: category.id,
+      //     title: category.attributes.title,
+      //   })),
+    }
+
+  return {
+    revalidate: 24 * 60 * 60, // 24 hours
+    props: {
+      anime: anime,
+      data: data.data
+    },
+  }
 }

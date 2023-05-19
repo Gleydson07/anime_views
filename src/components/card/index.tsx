@@ -1,3 +1,4 @@
+import Link from "next/link";
 import { CardContainer } from "./styles";
 
 interface CardsProps {
@@ -17,16 +18,18 @@ export default function Card({ cards }: CardsProps) {
     <CardContainer>
       {cards.map(card => (
         <li key={card.id}>
-          <article>
-            <figure className="card-header">
-              <img src={card.img} alt={card.title} />
-            </figure>
+            <article>
+              <Link href={`/details/${card.id}`}>
+                <figure className="card-header">
+                  <img src={card.img} alt={card.title}/>
+                </figure>
+              </Link>
 
-            <div className="card-content">
-              <h2>{card.title}</h2>
-            </div>
-          </article>
-        </li>
+              <div className="card-content">
+                <h2>{card.title}</h2>
+              </div>
+            </article>
+          </li>
       ))}
     </CardContainer>
 

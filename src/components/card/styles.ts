@@ -9,10 +9,11 @@ export const CardContainer = styled.ul`
 
   li{
     list-style: none;
-    cursor: pointer;
-
+    
     &:hover{
       .card-header{
+        cursor: pointer;
+        
         img{
           transform: scale(1.2);
           filter: blur(3px);
