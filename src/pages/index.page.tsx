@@ -13,7 +13,7 @@ export const getStaticProps:GetStaticProps = async () => {
     const response = await api.get("/anime");
 
     return {
-    //   revalidate: 60 * 5, // 5 minutes
+      revalidate: 60 * 5, // 5 minutes
       props: {
         animes: response.data
       }

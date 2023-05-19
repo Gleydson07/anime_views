@@ -24,4 +24,16 @@ export const Container = styled.figure`
     object-fit: cover;
     opacity: 0.3;
   }
+
+  @media(max-width: 485px){
+    height: 350px;
+
+    &::after{
+      top: 250px;
+    }
+
+    img{
+      height: 350px;
+    }
+  }
 `;

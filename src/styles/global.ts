@@ -1,5 +1,4 @@
 import { createGlobalStyle } from 'styled-components';
-// import { colors } from '../styles/theme'
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -21,5 +20,11 @@ export const GlobalStyle = createGlobalStyle`
 
   button{
     cursor: pointer;
+  }
+
+  @media(max-width: 485px){
+    body{
+      padding-top: 150px;
+    }
   }
 `;

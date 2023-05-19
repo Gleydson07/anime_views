@@ -1,7 +1,6 @@
 import styled from 'styled-components';
 
 export const Wrapper = styled.div`
-
   margin-top: 50px;
 
   .header{
@@ -61,6 +60,27 @@ export const Wrapper = styled.div`
         color: #fff;
         font-size: 1.25rem;
         font-weight: 100;
+      }
+    }
+  }
+
+  @media(max-width: 690px){
+    .header{
+      flex-direction: column;
+
+      figure{
+        width: 100%;
+        height: 250px;
+
+        img{
+          width: 100%;
+          height: 250px;
+          object-fit: cover;
+        }
+      }
+
+      .header-title{
+        width: 100%;
       }
     }
   }

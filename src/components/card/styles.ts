@@ -1,16 +1,14 @@
 import styled from 'styled-components';
 
 export const CardContainer = styled.ul`
-  display: flex;
-  flex-wrap: wrap;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
   gap: 20px;
-  width: 100%;
   padding: 0;
   margin: 0;
 
   li{
     list-style: none;
-    width: calc(100% / 6 - 20px);
     cursor: pointer;
 
     &:hover{
@@ -40,9 +38,23 @@ export const CardContainer = styled.ul`
     }
 
     .card-content{
-      color: white;
-      font-size: .875rem;
-      font-weight: 400;
+      h2{
+        color: white;
+        font-size: .875rem;
+        font-weight: 400;
+      }
+    }
+  }
+
+  @media(max-width: 485px){
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+    li{
+      .card-content{
+        h2{
+          font-size: .8rem;
+        }
+      }
     }
   }
 `
