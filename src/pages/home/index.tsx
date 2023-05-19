@@ -3,8 +3,6 @@ import Card from '@/components/card';
 import { Container } from '@/styles/grid';
 import { ContainerHome } from './styles';
 import Banner from '@/components/banner';
-import { GetStaticProps } from 'next';
-import AnimesService from '@/api/AnimesService';
 
 const cardsItens = [
   {
@@ -63,24 +61,15 @@ const cardsItens = [
   },
 ]
 
-export default function Home() {
+export default function Home({animes}: any) {
+  console.log(animes)
 
   return (
     <ContainerHome>
-      <Banner description='imagem de fundo com varios desenhos de animes' />
+      <Banner description='imagem de fundo com varios desenhos de animes.' />
       <Container>
         <Card cards={cardsItens} />
       </Container>
     </ContainerHome>
   )
-}
-
-export const getStaticProps: GetStaticProps = async () => {
-  const animes = await AnimesService.getAnimes();
-  console.log({animes});
-  
-  return {
-    revalidate: 60 * 60 * 24, // 24 hours
-    props: {}
-  }
 }
