@@ -18,16 +18,6 @@ export const getStaticProps:GetStaticProps = async () => {
       img: anime.attributes.posterImage.large,
       rating: anime.attributes.averageRating,
       ageRatingGuide: anime.attributes.ageRatingGuide,
-      // slug: anime.attributes.slug,
-      // description: anime.attributes.description,
-      // youtubeVideoId: anime.attributes.youtubeVideoId,
-      // categories: data.included
-      //   .filter((included: any) => anime.relationships.categories.data
-      //   .map((category: any) => category.id).includes(included.id))
-      //   .map((category: any) => ({
-      //     id: category.id,
-      //     title: category.attributes.title,
-      //   })),
     }))
 
     return {

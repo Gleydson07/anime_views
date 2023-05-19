@@ -12,7 +12,7 @@ export default function StarRating({ rating }: StarRatingProps) {
     const stars = [];
 
     for (let i = 0; i < amount; i++) {
-      stars.push(<Star size={32} color="#dfef0b" weight="fill" />);
+      stars.push(<Star key={i} size={32} color="#dfef0b" weight="fill" />);
     }
 
     return stars
