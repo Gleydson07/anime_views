@@ -30,7 +30,13 @@ height: 120px;
 }
 
   .input-wrapper{
+    display: flex;
+    justify-content: center;
     width: 50%;
+
+    button {
+      margin-left: 4px;
+    }
   }
 }
 

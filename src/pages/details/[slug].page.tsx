@@ -1,12 +1,12 @@
 import React from 'react';
 import { GetServerSideProps } from 'next';
-import Banner from '@/components/banner';
-import { Wrapper } from './styles';
-import { Container } from '@/styles/grid';
 import { Button } from 'antd';
+import api from '@/api';
+import Banner from '@/components/banner';
 import Tags from '@/components/tags';
 import StarRating from '@/components/starRating';
-import api from '@/api';
+import { Container } from '@/styles/grid';
+import { Wrapper } from './styles';
 
 export default function Details({anime}: any) {
   const {
@@ -17,12 +17,13 @@ export default function Details({anime}: any) {
     description,
     popularityRanking,
     rating,
-    ageRating,
     episodes,
     episodeCount,
     youtubeVideoId,
     categories,
   } = anime;
+
+  console.log({episodes})
 
   return (
     <Container id={id}>
@@ -35,7 +36,7 @@ export default function Details({anime}: any) {
           </figure>
 
           <div className='header-title'>
-            <h2>{title}</h2>
+            <h2 title={title}>{title}</h2>
             <Tags tags={categories} />
             <StarRating rating={rating} />
 
@@ -62,13 +63,13 @@ export default function Details({anime}: any) {
           </iframe>
         </div>
       </Wrapper>
-
     </Container>
   )
 }
 
 export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const id = params?.slug;
+  const defaultImg = "https://animesflix.net/_theme/img/image-header.jpg";
 
   if (!id) {
     return {
@@ -92,12 +93,11 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const anime = {
     id: responseAnime.data.id,
     title: responseAnime.data.attributes.canonicalTitle,
-    description: responseAnime.data.attributes.description,
-    popularityRanking: responseAnime.data.attributes.popularityRank,
-    img: responseAnime.data.attributes.posterImage.large,
-    banner: responseAnime.data.attributes.coverImage.large,
-    rating: responseAnime.data.attributes.averageRating,
-    ageRating: responseAnime.data.attributes.ageRating,
+    description: responseAnime.data.attributes?.description,
+    popularityRanking: responseAnime.data.attributes?.popularityRank,
+    img: responseAnime.data.attributes.posterImage?.large || defaultImg,
+    banner: responseAnime.data.attributes.coverImage?.large || defaultImg,
+    rating: responseAnime.data.attributes?.averageRating || 0,
     episodeCount: responseAnime.data.attributes.episodeCount,
     youtubeVideoId: responseAnime.data.attributes.youtubeVideoId,
     episodes: responseEpisodes.data.map((episode: any) => ({
@@ -116,7 +116,6 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
   return {
     props: {
       anime: anime,
-      data: responseEpisodes.data,
     },
   }
 }

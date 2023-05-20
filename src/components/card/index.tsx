@@ -9,11 +9,9 @@ interface CardItensProps {
   id: string,
   img: string,
   title: string,
-  slug: string,
 }
 
 export default function Card({ cards }: CardsProps) {
-
   return (
     <CardContainer>
       {cards.map(card => (
