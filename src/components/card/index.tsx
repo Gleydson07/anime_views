@@ -18,18 +18,20 @@ export default function Card({ cards }: CardsProps) {
     <CardContainer>
       {cards.map(card => (
         <li key={card.id}>
-            <article>
-              <Link href={`/details/${card.id}`}>
-                <figure className="card-header">
-                  <img src={card.img} alt={card.title}/>
-                </figure>
-              </Link>
+          <article>
+            <Link href={`/details/${card.id}`}>
+              <figure className="card-header">
+                <img src={card.img} alt={card.title} />
 
-              <div className="card-content">
-                <h2>{card.title}</h2>
-              </div>
-            </article>
-          </li>
+                <figcaption>Detalhes</figcaption>
+              </figure>
+            </Link>
+
+            <div className="card-content">
+              <h2>{card.title}</h2>
+            </div>
+          </article>
+        </li>
       ))}
     </CardContainer>
 

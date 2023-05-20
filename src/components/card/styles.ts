@@ -19,12 +19,18 @@ export const CardContainer = styled.ul`
           filter: blur(3px);
           opacity: 0.8;
         }
+
+        figcaption{
+          /* bottom: calc(50% - 50px); */
+          bottom: 0px;
+        }
       }
     }
 
     .card-header{
       position: relative;
       width: 100%;
+      max-width: 200px;
       height: auto;
       margin-bottom: 10px;
       line-height: 0;
@@ -36,6 +42,21 @@ export const CardContainer = styled.ul`
         height: auto;
         transition: all 0.3s linear;
       }
+
+      figcaption{
+        position: absolute;
+        bottom: -100%;
+        left: 50%;
+        width: 80%;
+        padding: 20px;
+        text-align: center;
+        color: rgba(255,255,255, 0.7);
+        font-weight: 400;
+        border-radius: 0.3rem;
+        background: rgba(255,255,255, 0.3);
+        transform: translate(-50%, -50%);
+        transition: all 0.3s linear;
+      }
     }
 
     .card-content{
@@ -45,6 +66,7 @@ export const CardContainer = styled.ul`
         font-weight: 600;
       }
     }
+
   }
 
   @media(max-width: 485px){

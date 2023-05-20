@@ -8,6 +8,68 @@ import Tags from '@/components/tags';
 import StarRating from '@/components/starRating';
 import api from '@/api';
 import Head from 'next/head'
+import Card from '@/components/card';
+import CardEpisode from '@/components/cardEpisode';
+
+const card = [
+  {
+    id: "1",
+    img: "https://image.tmdb.org/t/p/original/nEFjTWlKvaNZDEzNZ3NlkPFkezj.jpg",
+    title: "Boruto next generation",
+    epTitle: 'Acabaram com naruto',
+    epNumber: "1",
+    seasonNumber: "1",
+  },
+  {
+    id: "2",
+    img: "https://image.tmdb.org/t/p/original/nEFjTWlKvaNZDEzNZ3NlkPFkezj.jpg",
+    title: "Boruto next generation",
+    epTitle: 'Me salva naruto',
+    epNumber: "2",
+    seasonNumber: "1",
+  },
+  {
+    id: "3",
+    img: "https://image.tmdb.org/t/p/original/nEFjTWlKvaNZDEzNZ3NlkPFkezj.jpg",
+    title: "Boruto next generation",
+    epTitle: 'Anime merda',
+    epNumber: "3",
+    seasonNumber: "1",
+  },
+  {
+    id: "3",
+    img: "https://image.tmdb.org/t/p/original/nEFjTWlKvaNZDEzNZ3NlkPFkezj.jpg",
+    title: "Boruto next generation",
+    epTitle: 'Anime merda',
+    epNumber: "3",
+    seasonNumber: "1",
+  },
+  {
+    id: "3",
+    img: "https://image.tmdb.org/t/p/original/nEFjTWlKvaNZDEzNZ3NlkPFkezj.jpg",
+    title: "Boruto next generation",
+    epTitle: 'Anime merda',
+    epNumber: "3",
+    seasonNumber: "1",
+  },
+  {
+    id: "3",
+    img: "https://image.tmdb.org/t/p/original/nEFjTWlKvaNZDEzNZ3NlkPFkezj.jpg",
+    title: "Boruto next generation",
+    epTitle: 'Anime merda',
+    epNumber: "3",
+    seasonNumber: "1",
+  },
+  {
+    id: "3",
+    img: "https://image.tmdb.org/t/p/original/nEFjTWlKvaNZDEzNZ3NlkPFkezj.jpg",
+    title: "Boruto next generation",
+    epTitle: 'Anime merda',
+    epNumber: "3",
+    seasonNumber: "1",
+  },
+
+]
 
 export default function Details({ anime }: any) {
   const [isModalOpen, setIsModalOpen] = useState(false);
@@ -25,6 +87,8 @@ export default function Details({ anime }: any) {
     youtubeVideoId,
     categories,
   } = anime;
+
+  console.log(episodes)
 
   const showModal = () => {
     setIsModalOpen(true);
@@ -70,8 +134,16 @@ export default function Details({ anime }: any) {
               <h2>synopsis</h2>
               <p>{description}</p>
             </div>
+
+            <div className='episodes'>
+              <h2>Episodes</h2>
+
+              <CardEpisode cards={card} />
+            </div>
           </div>
         </Wrapper>
+
+
 
         <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} centered footer={false} width='80%'>
           <iframe

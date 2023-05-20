@@ -52,8 +52,26 @@ export const Wrapper = styled.div`
 
   .content{
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     
     .synopsis{
+      h2{
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 2rem;
+        font-weight: 600;
+        margin-bottom: 20px;
+      }
+      p{
+        line-height: 1.5;
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: 100;
+      }
+    }
+
+    .episodes{
       h2{
         text-transform: uppercase;
         color: #fff;
