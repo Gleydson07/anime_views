@@ -9,41 +9,25 @@ export const CardContainer = styled.ul`
 
   li{
     list-style: none;
-    
-    &:hover{
-      .card-header{
-        cursor: pointer;
-        
-        img{
-          transform: scale(1.2);
-          filter: blur(3px);
-          opacity: 0.8;
-        }
-      }
-    }
-
-    .card-header{
-      position: relative;
-      width: 100%;
-      height: auto;
-      margin-bottom: 10px;
-      line-height: 0;
-      border-radius: 0.2rem;
-      overflow: hidden;
-
-      img{
-        width: 100%;
-        height: auto;
-        transition: all 0.3s linear;
-      }
-    }
+    margin-bottom: 10px;
 
     .card-content{
-      h2{
-        color: white;
-        font-size: 1.5rem;
-        font-weight: 600;
+      background:#FFFFFF40;
+      border-radius: 4px;
+      
+      .skeleton-image{
+        width: 100%;
+        height: 343px;
       }
+
+      .skeleton-title{
+        width: 172px;
+      }
+    }
+    
+    .card-content-title{
+      width: 172px;
+      margin-top: 12px;
     }
   }
 
@@ -52,10 +36,24 @@ export const CardContainer = styled.ul`
 
     li{
       .card-content{
-        h2{
-          font-size: .8rem;
+        width: 200px;
+        background:#FFFFFF40;
+        border-radius: 4px;
+        
+        .skeleton-image{
+          width: 200px;
+          height: 300px;
         }
+
+        .skeleton-title{
+          width: 172px;
+        }
+      }
+      
+      .card-content-title{
+        width: 172px;
+        margin-top: 12px;
       }
     }
   }
-`
+`;

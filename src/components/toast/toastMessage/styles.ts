@@ -34,13 +34,16 @@ export const Container = styled.div<ToastProps>`
   align-items: center;
   padding: 16px 32px;
   border-radius: 4px;
-  font-family: 'Nunito';
-  font-weight: 700;
-  font-size: 16px;
   cursor: pointer;
   color: #F6F5FC;
   background: #FC5050;
   animation: ${messageIn} 0.3s;
+
+  strong {    
+    font-family: 'Nunito';
+    font-weight: 700;
+    font-size: 16px;
+  }
   
   ${({isLeaving}) => isLeaving && css`animation: ${messageOut} 0.3s forwards;`};
 

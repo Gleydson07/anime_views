@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState } from 'react';
 import Card from '@/components/card';
 import { Container } from '@/styles/grid';
 import { ContainerHome } from './styles';
@@ -43,7 +43,11 @@ export default function Home({ animes }: AnimeListProps) {
       setAnimeList(animes);
       
     } catch (error) {
-      
+      toast({
+        type: "error",
+        text: "Falha ao efetuar busca", 
+        duration: 5000
+      });
     } finally {
       setIsLoading(false);
     }

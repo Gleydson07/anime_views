@@ -1,14 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
-import { Button } from 'antd';
-import api from '@/api';
 import Banner from '@/components/banner';
+import { Wrapper } from './styles';
+import { Container } from '@/styles/grid';
+import { Button, Modal } from 'antd';
 import Tags from '@/components/tags';
 import StarRating from '@/components/starRating';
-import { Container } from '@/styles/grid';
-import { Wrapper } from './styles';
+import api from '@/api';
+import Head from 'next/head'
+import CardEpisode from '@/components/cardEpisode';
 
-export default function Details({anime}: any) {
+export default function Details({ anime }: any) {
+  console.log({ anime })
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     id,
     img,
@@ -23,51 +27,76 @@ export default function Details({anime}: any) {
     categories,
   } = anime;
 
-  console.log({episodes})
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
 
   return (
-    <Container id={id}>
-      <Banner img={banner} description='imagem de fundo do dragon ball gt' />
+    <>
+      <Head>
+        <title>Anime view | Detalhes - {title}</title>
+      </Head>
 
-      <Wrapper>
-        <div className='header'>
-          <figure>
-            <img src={img} alt="" />
-          </figure>
+      <Container id={id}>
+        <Banner img={banner} description='imagem de fundo do dragon ball gt' />
 
-          <div className='header-title'>
-            <h2 title={title}>{title}</h2>
-            <Tags tags={categories} />
-            <StarRating rating={rating} />
+        <Wrapper>
+          <div className='header'>
+            <figure>
+              <img src={img} alt={`imagem do ${title}`} />
+            </figure>
 
-            <span>{popularityRanking ? `${popularityRanking}° Popular ranking` : ''}</span>
-            <span>{episodeCount ? `${episodeCount} Episodes` : ''}</span>
+            <div className='header-title'>
+              <h2>{title}</h2>
+              <Tags tags={categories} />
+              <StarRating rating={rating} />
 
-            <Button type="primary">Watch video</Button>
+              <span>{popularityRanking ? `${popularityRanking}° Popular ranking` : ''}</span>
+              <span>{episodeCount ? `${episodeCount} Episodes` : ''}</span>
+
+              <Button type="primary" onClick={showModal}>Watch video</Button>
+            </div>
           </div>
-        </div>
 
-        <div className='content'>
-          <div className='synopsis'>
-            <h2>synopsis</h2>
-            <p>{description}</p>
+          <div className='content'>
+            <div className='synopsis'>
+              <h2>synopsis</h2>
+              <p>{description}</p>
+            </div>
+
+            <div className='episodes'>
+              <CardEpisode cards={episodes} />
+            </div>
           </div>
+        </Wrapper>
 
+
+
+        <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} centered footer={false} width='80%'>
           <iframe
             src={`https://www.youtube.com/embed/${youtubeVideoId}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            height={180}
-            width={340}
+            height={'500'}
+            width={'100%'}
           >
           </iframe>
-        </div>
-      </Wrapper>
-    </Container>
+        </Modal>
+
+      </Container>
+    </>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.slug;
   const defaultImg = "https://animesflix.net/_theme/img/image-header.jpg";
 
@@ -89,7 +118,7 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const responseAnime = responses[0]?.data;
   const responseCategories = responses[1]?.data;
   const responseEpisodes = responses[2]?.data;
-    
+
   const anime = {
     id: responseAnime.data.id,
     title: responseAnime.data.attributes.canonicalTitle,
@@ -102,14 +131,15 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
     youtubeVideoId: responseAnime.data.attributes.youtubeVideoId,
     episodes: responseEpisodes.data.map((episode: any) => ({
       id: episode.id,
-      title: episode.attributes.canonicalTitle,
-      description: episode.attributes.description,
-      season: episode.attributes.seasonNumber,
-      synopsis: episode.attributes.synopsis,
+      title: responseAnime.data.attributes?.canonicalTitle,
+      epTitle: episode.attributes.canonicalTitle,
+      epNumber: episode.attributes.number,
+      seasonNumber: episode.attributes.seasonNumber,
+      img: episode.attributes.thumbnail?.original || defaultImg,
     })),
     categories: responseCategories.data
       .filter((included: any) => responseAnime.data.relationships.categories.data
-      .map((category: any) => category.id).includes(included.id))
+        .map((category: any) => category.id).includes(included.id))
       .map((category: any) => category.attributes.title).slice(0, 3)
   }
 

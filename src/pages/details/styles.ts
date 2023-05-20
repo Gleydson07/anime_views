@@ -52,6 +52,8 @@ export const Wrapper = styled.div`
 
   .content{
     display: flex;
+    flex-direction: column;
+    gap: 20px;
     
     .synopsis{
       h2{
@@ -68,6 +70,27 @@ export const Wrapper = styled.div`
         font-weight: 100;
       }
     }
+
+    .episodes{
+      h2{
+        text-transform: uppercase;
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: 600;
+        margin: 20px 0;
+      }
+      p{
+        line-height: 1.5;
+        color: #fff;
+        font-size: 1.25rem;
+        font-weight: 100;
+      }
+    }
+  }
+
+  iframe{
+    width: 100%;
+    height: 100%;
   }
 
   @media(max-width: 690px){
@@ -75,6 +98,7 @@ export const Wrapper = styled.div`
       flex-direction: column;
 
       figure{
+        position: relative;
         width: 100%;
         height: 250px;
 
