@@ -1,5 +1,5 @@
 import React from 'react';
-import { GetStaticPaths, GetStaticProps } from 'next';
+import { GetServerSideProps } from 'next';
 import Banner from '@/components/banner';
 import { Wrapper } from './styles';
 import { Container } from '@/styles/grid';
@@ -8,44 +8,58 @@ import Tags from '@/components/tags';
 import StarRating from '@/components/starRating';
 import api from '@/api';
 
-const tags = ["Artes marciais", "Aventura", "Shounen"]
+export default function Details({anime}: any) {
+  const {
+    id,
+    img,
+    banner,
+    title,
+    description,
+    popularityRanking,
+    rating,
+    ageRating,
+    episodes,
+    episodeCount,
+    youtubeVideoId,
+    categories,
+  } = anime;
 
-export default function Details({anime, data}: any) {
-  console.log(anime, data)
   return (
-    <Container>
-      <Banner img='https://image.tmdb.org/t/p/original/erMkdaaYEyUqCSUEdYtqBtl63rK.jpg' description='imagem de fundo do dragon ball gt' />
+    <Container id={id}>
+      <Banner img={banner} description='imagem de fundo do dragon ball gt' />
 
       <Wrapper>
         <div className='header'>
           <figure>
-            <img src="https://image.tmdb.org/t/p/original/kmO4AHj1xx8wiaBMgwGjXhOQfNt.jpg" alt="" />
+            <img src={img} alt="" />
           </figure>
 
           <div className='header-title'>
-            <h2>Dragon bal gt</h2>
-            <Tags tags={tags} />
-            <StarRating rating={86.51} />
+            <h2>{title}</h2>
+            <Tags tags={categories} />
+            <StarRating rating={rating} />
 
-            <span>popularityRank 10</span>
-            <span>26 Episodios</span>
+            <span>{popularityRanking ? `${popularityRanking}° Popular ranking` : ''}</span>
+            <span>{episodeCount ? `${episodeCount} Episodes` : ''}</span>
 
-            <Button type="primary">Ver video</Button>
-
+            <Button type="primary">Watch video</Button>
           </div>
-
-
-
         </div>
 
         <div className='content'>
           <div className='synopsis'>
             <h2>synopsis</h2>
-            <p>A história se passa 10 anos após o final da saga Z, Goku reencontra vilões de sua infância, que estão roubando as esferas do dragão que estão no templo do kamisama, goku descobre o que eles estão tramando e por um engano, pilaf deseja que Shenlong transforme Goku em criança, agora as esferas se espalharam pelo universo e goku e seus amigos tem apenas um ano para encontrar todas, antes que a terra exploda. Eles embarcam numa aventura em busca das 7 esferas do dragão.</p>
+            <p>{description}</p>
           </div>
 
-
-          {/* <iframe src="https://www.youtube.com/embed/Sl2k7bfBeCw" title="YouTube video player" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"></iframe> */}
+          <iframe
+            src={`https://www.youtube.com/embed/${youtubeVideoId}`}
+            title="YouTube video player"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+            height={180}
+            width={340}
+          >
+          </iframe>
         </div>
       </Wrapper>
 
@@ -53,48 +67,56 @@ export default function Details({anime, data}: any) {
   )
 }
 
-export const getStaticPaths: GetStaticPaths = async () => {
-    return {
-        paths: [],
-        fallback: 'blocking'
-    }
-}
-
-export const getStaticProps: GetStaticProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const id = params?.slug;
 
   if (!id) {
     return {
-      notFound: true,
+      redirect: {
+        destination: `/`,
+        permanent: false,
+      }
     }
   }
 
-  const {data} = await api.get(`/anime/${id}?include=categories`);
+  const responses = await Promise.all([
+    api.get(`/anime/${id}?include=categories,episodes`),
+    api.get(`/anime/${id}/categories`),
+    api.get(`/anime/${id}/episodes`),
+  ]);
+
+  const responseAnime = responses[0]?.data;
+  const responseCategories = responses[1]?.data;
+  const responseEpisodes = responses[2]?.data;
     
-    const anime = {
-      id: data.data.id,
-      title: data.data.attributes.canonicalTitle,
-      img: data.data.attributes.posterImage.large,
-      banner: data.data.attributes.coverImage.large,
-      rating: data.data.attributes.averageRating,
-      ageRatingGuide: data.data.attributes.ageRatingGuide,
-      slug: data.data.attributes.slug,
-      description: data.data.attributes.description,
-      youtubeVideoId: data.data.attributes.youtubeVideoId,
-      // categories: data.data.included
-      //   .filter((included: any) => data.data.relationships.categories.data
-      //   .map((category: any) => category.id).includes(included.id))
-      //   .map((category: any) => ({
-      //     id: category.id,
-      //     title: category.attributes.title,
-      //   })),
-    }
+  const anime = {
+    id: responseAnime.data.id,
+    title: responseAnime.data.attributes.canonicalTitle,
+    description: responseAnime.data.attributes.description,
+    popularityRanking: responseAnime.data.attributes.popularityRank,
+    img: responseAnime.data.attributes.posterImage.large,
+    banner: responseAnime.data.attributes.coverImage.large,
+    rating: responseAnime.data.attributes.averageRating,
+    ageRating: responseAnime.data.attributes.ageRating,
+    episodeCount: responseAnime.data.attributes.episodeCount,
+    youtubeVideoId: responseAnime.data.attributes.youtubeVideoId,
+    episodes: responseEpisodes.data.map((episode: any) => ({
+      id: episode.id,
+      title: episode.attributes.canonicalTitle,
+      description: episode.attributes.description,
+      season: episode.attributes.seasonNumber,
+      synopsis: episode.attributes.synopsis,
+    })),
+    categories: responseCategories.data
+      .filter((included: any) => responseAnime.data.relationships.categories.data
+      .map((category: any) => category.id).includes(included.id))
+      .map((category: any) => category.attributes.title).slice(0, 3)
+  }
 
   return {
-    revalidate: 24 * 60 * 60, // 24 hours
     props: {
       anime: anime,
-      data: data.data
+      data: responseEpisodes.data,
     },
   }
 }
