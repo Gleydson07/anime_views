@@ -9,7 +9,6 @@ export const GlobalStyle = createGlobalStyle`
   }
 
   body{
-    padding-top: 250px;
     padding-bottom: 20px;
     background: #110920;
     -webkit-font-smooth: antialiased;
@@ -21,11 +20,5 @@ export const GlobalStyle = createGlobalStyle`
 
   button{
     cursor: pointer;
-  }
-
-  @media(max-width: 485px){
-    body{
-      padding-top: 150px;
-    }
   }
 `;

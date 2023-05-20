@@ -3,8 +3,8 @@ import styled from 'styled-components';
 export const CardContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
-  gap: 20px;
-  padding: 0;
+  gap: 10px;
+  padding: 250px 0 0 0;
   margin: 0;
 
   li{
@@ -22,7 +22,6 @@ export const CardContainer = styled.ul`
         }
 
         figcaption{
-          /* bottom: calc(50% - 50px); */
           bottom: 0px;
         }
       }
@@ -31,7 +30,6 @@ export const CardContainer = styled.ul`
     .card-header{
       position: relative;
       width: 100%;
-      /* max-width: 200px; */
       height: auto;
       margin-bottom: 10px;
       line-height: 0;
@@ -73,8 +71,31 @@ export const CardContainer = styled.ul`
 
   }
 
+  @media(max-width: 779px){
+    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+
+    li{
+      .card-content{
+        h2{
+          font-size: .8rem;
+        }
+      }
+    }
+  }
+  @media(max-width: 683px){
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+
+    li{
+      .card-content{
+        h2{
+          font-size: .8rem;
+        }
+      }
+    }
+  }
   @media(max-width: 485px){
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+    padding: 180px 0 0 0;
 
     li{
       .card-content{

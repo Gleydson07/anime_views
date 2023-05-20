@@ -16,18 +16,19 @@ height: 120px;
 
   figure{
     position: relative;
-    width: 500px;
+    width: 100%;
+    max-width: 500px;
     height: 150px;
 
-  img{
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    width: 100%;
-    height: auto;
-    transform: translate(-50%, -50%);
+    img{
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 100%;
+      height: auto;
+      transform: translate(-50%, -50%);
+    }
   }
-}
 
   .input-wrapper{
     display: flex;
@@ -40,9 +41,25 @@ height: 120px;
   }
 }
 
+  @media(max-width: 779px){
+    .header-wrapper{
 
+      .input-wrapper{
+        width: 100%;
 
+        button {
+          margin-left: 4px;
+        }
+      }
+    }
+  }
+  @media(max-width: 485px){
+    .header-wrapper{
 
-
+      figure{
+        height: 100px;
+      }
+    }
+  }
 
 `

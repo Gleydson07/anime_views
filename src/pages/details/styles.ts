@@ -2,6 +2,7 @@ import styled from 'styled-components';
 
 export const Wrapper = styled.div`
   margin-top: 50px;
+  padding-top: 250px;
 
   .header{
     display: flex;
@@ -26,10 +27,11 @@ export const Wrapper = styled.div`
       flex-direction: column;
       gap: 10px;
       align-self: flex-end;
-
       margin: 10px 0px;
 
       h2{
+        max-width: 500px;
+        width: 100%;
         color: white;
         font-size: 2.5rem;
         font-weight: 600;
@@ -93,7 +95,7 @@ export const Wrapper = styled.div`
     height: 100%;
   }
 
-  @media(max-width: 690px){
+  @media(max-width: 785px){
     .header{
       flex-direction: column;
 
@@ -111,6 +113,33 @@ export const Wrapper = styled.div`
 
       .header-title{
         width: 100%;
+      }
+    }
+  }
+
+  @media(max-width: 485px){
+    padding-top: 50px;
+
+    .header{
+      gap: 10px;
+      margin-bottom: 20px;
+      .header-title{
+        h2{
+          font-size: 1.5rem;
+        }
+      }
+    }
+
+    .content{
+      display: flex;
+      flex-direction: column;
+      gap: 20px;
+      
+      .synopsis{
+        h2{
+          font-size: 1.5rem;
+          margin-bottom: 20px;
+        }
       }
     }
   }

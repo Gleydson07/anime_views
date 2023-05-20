@@ -1,5 +1,6 @@
-import { Button } from "antd";
+import { Button, Modal } from "antd";
 import { CardContainer, Container } from "./styles";
+import { useState } from "react";
 
 interface CardsProps {
   cards: Array<CardItensProps>
@@ -15,7 +16,9 @@ interface CardItensProps {
 }
 
 export default function CardEpisode({ cards }: CardsProps) {
-  
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [isEpidode, setIsEpidode] = useState("");
+
   if (!cards.some(card => card.seasonNumber && card.epNumber && card.img)) {
     return (
       <Container>
@@ -24,6 +27,16 @@ export default function CardEpisode({ cards }: CardsProps) {
       </Container>
     )
   };
+
+  const showModal = (titleEp: string) => {
+    setIsModalOpen(true);
+    setIsEpidode(titleEp);
+  };
+
+  const handleCLose = () => {
+    setIsModalOpen(false);
+  };
+
 
   return (
     <Container>
@@ -42,11 +55,15 @@ export default function CardEpisode({ cards }: CardsProps) {
             <div className='card-episode-footer'>
               <span>{card.seasonNumber} x {card.epNumber} - {card.epTitle}</span>
 
-              <Button type="primary">Detalhes</Button>
+              <Button type="primary" onClick={() => showModal(card.title)}>Detalhes</Button>
             </div>
           </li>
         ))}
       </CardContainer>
+
+      <Modal title={isEpidode} open={isModalOpen} onCancel={handleCLose} centered footer={false} width='50%' destroyOnClose={true}>
+        <h1>todo o conteudo do episodio</h1>
+      </Modal>
     </Container>
 
   )

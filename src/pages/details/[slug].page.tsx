@@ -11,7 +11,6 @@ import Head from 'next/head'
 import CardEpisode from '@/components/cardEpisode';
 
 export default function Details({ anime }: any) {
-  console.log({ anime })
   const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     id,
@@ -31,11 +30,7 @@ export default function Details({ anime }: any) {
     setIsModalOpen(true);
   };
 
-  const handleOk = () => {
-    setIsModalOpen(false);
-  };
-
-  const handleCancel = () => {
+  const handleCLose = () => {
     setIsModalOpen(false);
   };
 
@@ -80,7 +75,7 @@ export default function Details({ anime }: any) {
 
 
 
-        <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} centered footer={false} width='80%'>
+        <Modal title={title} open={isModalOpen} onCancel={handleCLose} centered footer={false} width='80%' destroyOnClose={true}>
           <iframe
             src={`https://www.youtube.com/embed/${youtubeVideoId}`}
             title="YouTube video player"

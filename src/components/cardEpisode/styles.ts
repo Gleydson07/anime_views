@@ -5,18 +5,14 @@ export const Container = styled.div`
 `
 
 export const CardContainer = styled.ul`
-  /* display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); */
-  display: flex;
-  flex-wrap: wrap;
-  gap: 20px;
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 10px;
   margin: 0;
   padding: 0;
 
   .card-episode{
-    max-width: calc(100% / 6 - 20px);
-    /* max-width: 250px; */
-    height: 300px;
+    max-width: 180px;
     background: #1b0f30;
     padding: 10px;
     border-radius: 0.3rem;
@@ -56,8 +52,22 @@ export const CardContainer = styled.ul`
         font-weight: 600;
       }
     }
+  }
 
+  @media(max-width: 811px){
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
 
+    .card-episode{
+      max-width: 240px;
+    }
+  }
+
+  @media(max-width: 617px){
+    grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+    .card-episode{
+      max-width: 100%;
+    }
   }
 
 `
