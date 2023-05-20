@@ -1,4 +1,6 @@
-# Descrição do Site de Animes
+# Site Anime Views
+
+![Banner](https://animesflix.net/_theme/img/image-header.jpg)
 
 Este é um site desenvolvido utilizando o framework Next.js na versão 13, com a biblioteca de estilização Ant Design, TypeScript e a integração com a API Kitsu, que fornece dados sobre animes.
 
