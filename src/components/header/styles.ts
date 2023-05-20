@@ -1,7 +1,7 @@
 import styled from "styled-components";
 
 export const HeaderContainer = styled.header`
-position: fixed;
+position: absolute;
 top: 0;
 z-index: 10;
 width: 100%;
@@ -10,19 +10,22 @@ height: 120px;
 .header-wrapper{
   width: 100%;
   display: flex;
+  flex-direction: column;
   justify-content: space-between;
   align-items: center;
-  /* background-color: rgba(0, 0, 0, 0.2); */
-  border: 1px solid red;
 
   figure{
-    width: 150px;
-    height: auto;
-    border: 1px solid red;
+    position: relative;
+    width: 500px;
+    height: 150px;
 
   img{
+    position: absolute;
+    top: 50%;
+    left: 50%;
     width: 100%;
     height: auto;
+    transform: translate(-50%, -50%);
   }
 }
 
