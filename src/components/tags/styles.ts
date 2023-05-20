@@ -1,18 +1,23 @@
 import styled from "styled-components";
+import { spacings } from '../../styles/template/spacings'
+import { colors } from '../../styles/template/colors'
+import { borders } from '../../styles/template/border'
+import { fontWeights, fontSizes } from '../../styles/template/typographys'
 
 export const Container = styled.div`
   display: flex;
-  gap: 8px;
+  gap: ${spacings.sm};
 
   .tag{
-    background: grey;
-    padding: 0.5rem;
-    border-radius: 0.3rem;
+    background: ${colors.gray};
+    padding: ${spacings.sm};
+    border-radius: ${borders.sm};
 
     strong{
-      color: white;
+      color: ${colors.white};
       font-size: 0.8rem;
-      font-weight: 400;
+      font-size: ${fontSizes.sm};
+      font-weight: ${fontWeights.w400};
     }
   }
 `

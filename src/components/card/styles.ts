@@ -1,9 +1,13 @@
 import styled from 'styled-components';
+import { spacings } from '../../styles/template/spacings'
+import { colors } from '../../styles/template/colors'
+import { borders } from '../../styles/template/border'
+import { fontWeights, fontSizes } from '../../styles/template/typographys'
 
 export const CardContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
-  gap: 10px;
+  gap: ${spacings.sm};
   padding: 250px 0 0 0;
   margin: 0;
 
@@ -31,9 +35,9 @@ export const CardContainer = styled.ul`
       position: relative;
       width: 100%;
       height: auto;
-      margin-bottom: 10px;
+      margin-bottom: ${spacings.sm};
       line-height: 0;
-      border-radius: 0.2rem;
+      border-radius: ${borders.sm};
       overflow: hidden;
 
       img{
@@ -47,11 +51,11 @@ export const CardContainer = styled.ul`
         bottom: -100%;
         left: 50%;
         width: 80%;
-        padding: 20px;
+        padding: ${spacings.md};
         text-align: center;
         color: rgba(255,255,255, 0.7);
-        font-weight: 400;
-        border-radius: 0.3rem;
+        font-weight: ${fontWeights.w400};
+        border-radius: ${borders.sm};
         background: rgba(255,255,255, 0.3);
         transform: translate(-50%, -50%);
         transition: all 0.3s linear;
@@ -60,9 +64,9 @@ export const CardContainer = styled.ul`
 
     .card-content{
       h2{
-        color: white;
-        font-size: 1.25rem;
-        font-weight: 600;
+        color: ${colors.white};
+        font-size: ${fontSizes.ls};
+        font-weight: ${fontWeights.w600};
         white-space: nowrap;
         overflow: hidden;
         text-overflow: ellipsis;
@@ -77,22 +81,15 @@ export const CardContainer = styled.ul`
     li{
       .card-content{
         h2{
-          font-size: .8rem;
+          font-size: ${fontSizes.md};
         }
       }
     }
   }
   @media(max-width: 683px){
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
-
-    li{
-      .card-content{
-        h2{
-          font-size: .8rem;
-        }
-      }
-    }
   }
+  
   @media(max-width: 485px){
     grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
     padding: 180px 0 0 0;
@@ -100,7 +97,7 @@ export const CardContainer = styled.ul`
     li{
       .card-content{
         h2{
-          font-size: .8rem;
+          font-size: ${fontSizes.sm};
         }
       }
     }

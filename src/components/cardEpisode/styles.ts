@@ -1,27 +1,29 @@
 import styled from 'styled-components';
-
-export const Container = styled.div`
-  
-`
+import { spacings } from '../../styles/template/spacings'
+import { colors } from '../../styles/template/colors'
+import { borders } from '../../styles/template/border'
+import { fontWeights, fontSizes } from '../../styles/template/typographys'
 
 export const CardContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
-  gap: 10px;
+  gap: ${spacings.sm};
   margin: 0;
   padding: 0;
 
   .card-episode{
     max-width: 180px;
     background: #1b0f30;
-    padding: 10px;
-    border-radius: 0.3rem;
+    background: ${colors.backgroundCard};
+    gap: ${spacings.md};
+    padding: ${spacings.sm};
+    border-radius: ${borders.sm};
     list-style: none;
 
     figure{
       width: 100%;
       height: auto;
-      border-radius: 0.3rem;
+      border-radius: ${borders.sm};
       overflow: hidden;
 
       img{
@@ -31,10 +33,10 @@ export const CardContainer = styled.ul`
       }
 
       figcaption{
-        margin: 10px 0px;
-        color: #a0a0a0;
-        font-size: 0.75rem;
-        font-weight: 600;
+        margin: ${spacings.xs} 0px;
+        color: ${colors.gray100};
+        font-size: ${fontSizes.sl};
+        font-weight: ${fontWeights.w400};
       }
     }
 
@@ -42,14 +44,14 @@ export const CardContainer = styled.ul`
       display: flex;
       flex-direction: column;
       justify-content: space-between;
-      gap: 8px;
+      gap: ${spacings.xs};
       
       > span{
-        color: white;
+        color: ${colors.white};
         overflow: auto;
         height: 44px;
-        font-size: 0.875rem;
-        font-weight: 600;
+        font-size: ${fontSizes.sm};
+        font-weight: ${fontWeights.w600};
       }
     }
   }
@@ -64,6 +66,14 @@ export const CardContainer = styled.ul`
 
   @media(max-width: 617px){
     grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+
+    .card-episode{
+      max-width: 100%;
+    }
+  }
+
+  @media(max-width: 433px){
+    grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
 
     .card-episode{
       max-width: 100%;

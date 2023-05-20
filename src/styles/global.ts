@@ -1,4 +1,11 @@
 import { createGlobalStyle } from 'styled-components';
+import {
+  colors
+} from './template/colors'
+
+import {
+  fontFamily
+} from './template/typographys'
 
 export const GlobalStyle = createGlobalStyle`
 
@@ -10,12 +17,12 @@ export const GlobalStyle = createGlobalStyle`
 
   body{
     padding-bottom: 20px;
-    background: #110920;
+    background: ${colors.background};
     -webkit-font-smooth: antialiased;
   }
 
   body, input, text-area, button{
-    font-family: 'Nunito', sans-serif;
+    font-family: ${fontFamily.nunito}, sans-serif;
   }
 
   button{

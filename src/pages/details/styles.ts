@@ -1,4 +1,8 @@
 import styled from 'styled-components';
+import { spacings } from '../../styles/template/spacings'
+import { borders } from '../../styles/template/border'
+import { colors } from '../../styles/template/colors'
+import { fontWeights, fontSizes } from '../../styles/template/typographys'
 
 export const Wrapper = styled.div`
   margin-top: 50px;
@@ -6,13 +10,13 @@ export const Wrapper = styled.div`
 
   .header{
     display: flex;
-    gap: 20px;
+    gap: ${spacings.md};
     margin-bottom: 50px;
 
     figure{
       width: 250px;
       height: auto;
-      border-radius: 0.2rem;
+      border-radius: ${borders.md};
       line-height: 0;
       overflow: hidden;
 
@@ -25,28 +29,28 @@ export const Wrapper = styled.div`
     .header-title{
       display: flex;
       flex-direction: column;
-      gap: 10px;
+      gap: ${spacings.sm};
       align-self: flex-end;
-      margin: 10px 0px;
+      margin: ${spacings.sm} 0px;
 
       h2{
         max-width: 500px;
         width: 100%;
-        color: white;
-        font-size: 2.5rem;
-        font-weight: 600;
+        color: ${colors.white};
+        font-size: ${fontSizes.xx};
+        font-weight: ${fontWeights.w600};
       }
 
       p{
-        color: white;
-        font-size: 0.8rem;
-        font-weight: 100;
+        color: ${colors.white};
+        font-size: ${fontSizes.sm};
+        font-weight: ${fontWeights.w100};
       }
 
       > span{
         height: 1.125rem;
-        color: #fff;
-        font-size: 0.875rem;
+        color: ${colors.white};
+        font-size: ${fontSizes.sm};
       }
     }
    
@@ -60,32 +64,26 @@ export const Wrapper = styled.div`
     .synopsis{
       h2{
         text-transform: uppercase;
-        color: #fff;
-        font-size: 2rem;
-        font-weight: 600;
-        margin-bottom: 20px;
+        color: ${colors.white};
+        font-size: ${fontSizes.xl};
+        font-weight: ${fontWeights.w600};
+        margin-bottom: ${spacings.md};
       }
       p{
         line-height: 1.5;
-        color: #fff;
-        font-size: 1.25rem;
-        font-weight: 100;
+        color: ${colors.white};
+        font-size: ${fontSizes.ml};
+        font-weight: ${fontWeights.w100};
       }
     }
 
     .episodes{
       h2{
         text-transform: uppercase;
-        color: #fff;
-        font-size: 1.25rem;
-        font-weight: 600;
-        margin: 20px 0;
-      }
-      p{
-        line-height: 1.5;
-        color: #fff;
-        font-size: 1.25rem;
-        font-weight: 100;
+        color: ${colors.white};
+        font-size: ${fontSizes.xl};
+        font-weight: ${fontWeights.w600};
+        margin: ${spacings.md} 0;
       }
     }
   }
@@ -118,14 +116,14 @@ export const Wrapper = styled.div`
   }
 
   @media(max-width: 485px){
-    padding-top: 50px;
+    padding-top: ${spacings.md};
 
     .header{
-      gap: 10px;
-      margin-bottom: 20px;
+      gap: ${spacings.sm};
+      margin-bottom: ${spacings.sm};
       .header-title{
         h2{
-          font-size: 1.5rem;
+          font-size: ${fontSizes.xl};
         }
       }
     }
@@ -133,12 +131,12 @@ export const Wrapper = styled.div`
     .content{
       display: flex;
       flex-direction: column;
-      gap: 20px;
+      gap: ${spacings.sm};
       
-      .synopsis{
+      .synopsis, .episodes{
         h2{
-          font-size: 1.5rem;
-          margin-bottom: 20px;
+          font-size: ${fontSizes.lg};
+          gap: ${spacings.sm};
         }
       }
     }

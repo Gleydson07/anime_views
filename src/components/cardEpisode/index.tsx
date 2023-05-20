@@ -1,6 +1,6 @@
 import { Button, Modal } from "antd";
-import { CardContainer, Container } from "./styles";
-import { useState } from "react";
+import { CardContainer } from "./styles";
+import { useEffect, useState } from "react";
 
 interface CardsProps {
   cards: Array<CardItensProps>
@@ -18,13 +18,14 @@ interface CardItensProps {
 export default function CardEpisode({ cards }: CardsProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [isEpidode, setIsEpidode] = useState("");
+  const [dimensions, setDimensions] = useState(0)
 
   if (!cards.some(card => card.seasonNumber && card.epNumber && card.img)) {
     return (
-      <Container>
+      <>
         <h2>Episodes</h2>
         <span>Episodes not available.</span>
-      </Container>
+      </>
     )
   };
 
@@ -37,11 +38,18 @@ export default function CardEpisode({ cards }: CardsProps) {
     setIsModalOpen(false);
   };
 
+  const handleResize = () => {
+    setDimensions(window.innerWidth)
+  }
+
+  useEffect(() => {
+    window.addEventListener('resize', handleResize)
+  })
+
 
   return (
-    <Container>
+    <>
       <h2>Episodes</h2>
-
       <CardContainer>
         {cards.map(card => card.seasonNumber && card.epNumber && card.img && (
           <li className="card-episode" key={card.id}>
@@ -55,16 +63,16 @@ export default function CardEpisode({ cards }: CardsProps) {
             <div className='card-episode-footer'>
               <span>{card.seasonNumber} x {card.epNumber} - {card.epTitle}</span>
 
-              <Button type="primary" onClick={() => showModal(card.title)}>Detalhes</Button>
+              <Button type="primary" onClick={() => showModal(card.epTitle)}>Detalhes</Button>
             </div>
           </li>
         ))}
       </CardContainer>
 
-      <Modal title={isEpidode} open={isModalOpen} onCancel={handleCLose} centered footer={false} width='50%' destroyOnClose={true}>
+      <Modal title={isEpidode} open={isModalOpen} onCancel={handleCLose} centered footer={false} width={dimensions <= 620 ? '80%' : '50%'} destroyOnClose={true}>
         <h1>todo o conteudo do episodio</h1>
       </Modal>
-    </Container>
+    </>
 
   )
 }
