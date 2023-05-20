@@ -40,6 +40,12 @@ export const Wrapper = styled.div`
         font-size: 0.8rem;
         font-weight: 100;
       }
+
+      > span{
+        height: 1.125rem;
+        color: #fff;
+        font-size: 0.875rem;
+      }
     }
    
   }
