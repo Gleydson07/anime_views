@@ -18,6 +18,8 @@ export default function StarRating({ rating }: StarRatingProps) {
     return stars
   }
 
+  if (!rating) return null;
+
   return (
     <Container>
       {amountStars()}

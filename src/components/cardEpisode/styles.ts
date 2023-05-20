@@ -34,7 +34,7 @@ export const CardContainer = styled.ul`
 
       figcaption{
         margin: ${spacings.xs} 0px;
-        color: ${colors.gray100};
+        color: ${colors.gray200};
         font-size: ${fontSizes.sl};
         font-weight: ${fontWeights.w400};
       }

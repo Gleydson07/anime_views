@@ -31,6 +31,17 @@ export const CardContainer = styled.ul`
       }
     }
 
+    .skeleton-container{
+      background:#FFFFFF40;
+      border-radius: 4px;
+      margin-bottom: ${spacings.sm};
+      
+      .skeleton-image{
+        width: 100%;
+        height: 330px;
+      }
+    }
+
     .card-header{
       position: relative;
       width: 100%;

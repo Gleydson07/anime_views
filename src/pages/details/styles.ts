@@ -26,6 +26,17 @@ export const Wrapper = styled.div`
       }
     }
 
+    .skeleton-container{
+      background:#FFFFFF40;
+      border-radius: 4px;
+      margin-bottom: ${spacings.sm};
+      
+      .skeleton-image{
+        width: 250px;
+        height: 354px;
+      }
+    }
+
     .header-title{
       display: flex;
       flex-direction: column;
@@ -140,5 +151,17 @@ export const Wrapper = styled.div`
         }
       }
     }
+  }
+`;
+
+export const Footer = styled.footer`
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 32px;
+
+  button {
+    width: 150px;
+    font-weight: 700;
   }
 `;

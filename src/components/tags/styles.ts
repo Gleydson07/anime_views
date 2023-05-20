@@ -9,7 +9,7 @@ export const Container = styled.div`
   gap: ${spacings.sm};
 
   .tag{
-    background: ${colors.gray};
+    background: ${colors.gray100};
     padding: ${spacings.sm};
     border-radius: ${borders.sm};
 

@@ -20,13 +20,12 @@ export default function Home({animes}: AnimeListProps) {
 }
 
 export const getStaticProps:GetStaticProps = async () => {
-    const {data} = await api.get("/anime?page[limit]=20");
-    const defaultImg = "https://animesflix.net/_theme/img/image-header.jpg";
+    const {data} = await api.get("/anime?page[limit]=18");
     
     const animes = data.data.map((anime: any) => ({
       id: anime.id,
       title: anime.attributes.canonicalTitle,
-      img: anime.attributes.posterImage?.large || defaultImg,
+      img: anime.attributes.posterImage?.large,
     }))
 
     return {

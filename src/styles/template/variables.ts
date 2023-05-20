@@ -36,6 +36,7 @@ export const colors = {
   white: '#ffffff',
   gray100: '#808080',
   gray200: '#a0a0a0',
+  gray300: '#c1c1c1',
   yellow: '#DFEF0B',
   blue: '#1677ff',
 }

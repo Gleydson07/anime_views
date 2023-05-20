@@ -1,4 +1,5 @@
 import styled from "styled-components";
+import { colors } from '../../styles/template/colors'
 
 export const HeaderContainer = styled.header`
 position: absolute;
@@ -35,8 +36,13 @@ height: 120px;
     justify-content: center;
     width: 50%;
 
+    input[disabled]{
+      background-color: ${colors.gray300};
+    }
+
     button {
       margin-left: 4px;
+      width: 120px;
     }
   }
 }

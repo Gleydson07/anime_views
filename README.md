@@ -1,38 +1,73 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Descrição do Site de Animes
 
-## Getting Started
+Este é um site desenvolvido utilizando o framework Next.js na versão 13, com a biblioteca de estilização Ant Design, TypeScript e a integração com a API Kitsu, que fornece dados sobre animes.
 
-First, run the development server:
+## Finalidade
 
-```bash
-npm run dev
-# or
-yarn dev
-# or
-pnpm dev
-```
+Este é o projeto foi criado como parte de um teste para uma vaga de desenvolvedor. O objetivo do projeto é desenvolver um aplicativo da web para visualização de animes.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+## Tecnologias Utilizadas
 
-You can start editing the page by modifying `pages/index.tsx`. The page auto-updates as you edit the file.
+O site foi desenvolvido utilizando as seguintes tecnologias:
 
-[API routes](https://nextjs.org/docs/api-routes/introduction) can be accessed on [http://localhost:3000/api/hello](http://localhost:3000/api/hello). This endpoint can be edited in `pages/api/hello.ts`.
+- **Next.js v13:** O Next.js é um framework React de código aberto utilizado para a construção de aplicações web. Sua versão 13 traz melhorias de desempenho e novos recursos para facilitar o desenvolvimento.
 
-The `pages/api` directory is mapped to `/api/*`. Files in this directory are treated as [API routes](https://nextjs.org/docs/api-routes/introduction) instead of React pages.
+- **Ant Design:** Ant Design é uma biblioteca de componentes de interface de usuário (UI) para React. Ela oferece um conjunto de componentes prontos e estilizados, que facilitam a criação de interfaces elegantes e responsivas.
 
-This project uses [`next/font`](https://nextjs.org/docs/basic-features/font-optimization) to automatically optimize and load Inter, a custom Google Font.
+- **TypeScript:** TypeScript é um superconjunto de JavaScript que adiciona recursos de tipagem estática ao JavaScript. Com o TypeScript, é possível detectar erros durante o desenvolvimento e obter um código mais seguro e escalável.
 
-## Learn More
+- **API Kitsu:** A API Kitsu é uma plataforma que fornece dados sobre animes, incluindo informações sobre títulos, episódios, personagens e muito mais. Ela possui uma ampla variedade de recursos que podem ser utilizados para exibir e pesquisar informações sobre animes.
 
-To learn more about Next.js, take a look at the following resources:
+## Funcionalidades
 
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
+O site de animes desenvolvido possui as seguintes funcionalidades:
 
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js/) - your feedback and contributions are welcome!
+1. **Listagem de Animes:** O site exibe uma lista de animes populares, obtidos através da API Kitsu. Cada anime é exibido com sua imagem e título.
 
-## Deploy on Vercel
+2. **Detalhes do Anime:** Ao clicar em um anime da lista, é possível visualizar os detalhes completos do anime, incluindo sua sinopse, gêneros, classificação, vídeo (se disponível) e outras informações relevantes.
 
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
+3. **Pesquisa de Animes:** O site permite que os usuários realizem pesquisas por animes específicos. Ao digitar o nome do anime desejado na barra de pesquisa, o site exibe os resultados correspondentes, obtidos através da API Kitsu.
 
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/deployment) for more details.
+4. **Paginação:** Quando a lista de animes é extensa, o site oferece recursos de paginação por meio do botão "See more" para facilitar a navegação.
+
+## Estrutura do projeto
+├── components/    # Componentes React reutilizáveis <br>
+│   ├── Banner.tsx          # Componente de banner <br>
+│   ├── Card.tsx            # Componente de card <br>
+│   ├── CardEpisodes.tsx    # Componente de card de episódios <br>
+│   ├── Header.tsx          # Componente de cabeçalho <br>
+│   ├── Skeletons.tsx       # Componente de placeholders de carregamento <br>
+│   ├── StarRating.tsx      # Componente de classificação de estrelas <br>
+│   ├── Tags.tsx            # Componente de tags <br>
+│   └── Toast.tsx           # Componente de mensagem de toast <br>
+├── pages/         # Páginas do Next.js <br>
+├── styles/        # Estilos globais e estilos de componentes <br>
+├── public/        # Arquivos estáticos públicos <br>
+├── api/           # Lógica de chamadas de API <br>
+├── utils/         # Utilitários e funções auxiliares <br>
+└── ...
+
+## Como executar o site
+
+Para executar o site em sua própria máquina, siga as etapas abaixo:
+
+1. Certifique-se de ter o Node.js instalado em sua máquina.
+
+2. Clone o repositório do site a partir do GitHub.
+
+3. Navegue até o diretório raiz do projeto e execute o comando `npm install` para instalar as dependências do projeto.
+
+4. Após a instalação das dependências, execute o comando `npm run dev` para iniciar o servidor de desenvolvimento.
+
+5. Acesse o site no seu navegador através do endereço `http://localhost:3000`.
+
+
+## Prototipo
+O prototipo deste projeto foi desenvolvido usando a ferramenta de design FIGMA, para visualizar clique [aqui](https://www.figma.com/file/hqQAxMhHzeF5O7zczrtRwm/Anime_views?type=design&node-id=0%3A1&t=ubB7uAXhHiWWVh7p-1).
+
+## Licença
+Este projeto está licenciado sob a Licença MIT.
+
+## Conclusão
+
+O site de animes desenvolvido com Next.js v13, Ant Design, TypeScript e a API Kitsu é uma plataforma que oferece uma experiência agradável para os amantes de animes. Com sua interface intuitiva, é possível visualizar informações detalhadas sobre os animes, realizar pesquisas específicas e explorar uma ampla variedade de títulos. A integração com a API Kitsu garante que os dados exibidos sejam sempre atualizados e precisos.

@@ -4,7 +4,7 @@ export const CardContainer = styled.ul`
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(232px, 1fr));
   gap: 20px;
-  padding: 0;
+  padding: 250px 0 0 0;
   margin: 0;
 
   li{

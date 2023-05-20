@@ -1,5 +1,6 @@
 import Link from "next/link";
 import { CardContainer } from "./styles";
+import { Skeleton } from "antd";
 
 interface CardsProps {
   cards: Array<CardItensProps>
@@ -18,11 +19,17 @@ export default function Card({ cards }: CardsProps) {
         <li key={card.id} title={card.title}>
           <article>
             <Link href={`/details/${card.id}`}>
-              <figure className="card-header">
-                <img src={card.img} alt={card.title} />
+              {card.img ? (
+                <figure className="card-header">
+                  <img src={card.img} alt={card.title} />
 
-                <figcaption>Detalhes</figcaption>
-              </figure>
+                  <figcaption>Detalhes</figcaption>
+                </figure>
+              ) : (
+                <div className="skeleton-container">
+                  <Skeleton.Image className="skeleton-image"/>
+                </div>
+              )}
             </Link>
 
             <div className="card-content">
