@@ -1,15 +1,12 @@
 import Document, { Html, Head, Main, NextScript } from 'next/document'
-import { ServerStyleSheet } from 'styled-components'
-
 export default class MyDocument extends Document {
   static async getInitialProps(ctx: any) {
-
     return ctx.renderPage;
   }
-  
+
   render() {
     return (
-      <Html lang="en">
+      <Html>
         <Head>
           <link rel="preconnect" href="https://fonts.googleapis.com" />
           <link rel="preconnect" href="https://fonts.gstatic.com" crossOrigin="anonymous" />

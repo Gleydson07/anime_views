@@ -70,11 +70,17 @@ export const Wrapper = styled.div`
     }
   }
 
+  iframe{
+    width: 100%;
+    height: 100%;
+  }
+
   @media(max-width: 690px){
     .header{
       flex-direction: column;
 
       figure{
+        position: relative;
         width: 100%;
         height: 250px;
 

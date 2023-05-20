@@ -1,14 +1,16 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { GetServerSideProps } from 'next';
 import Banner from '@/components/banner';
 import { Wrapper } from './styles';
 import { Container } from '@/styles/grid';
-import { Button } from 'antd';
+import { Button, Modal } from 'antd';
 import Tags from '@/components/tags';
 import StarRating from '@/components/starRating';
 import api from '@/api';
+import Head from 'next/head'
 
-export default function Details({anime}: any) {
+export default function Details({ anime }: any) {
+  const [isModalOpen, setIsModalOpen] = useState(false);
   const {
     id,
     img,
@@ -24,50 +26,70 @@ export default function Details({anime}: any) {
     categories,
   } = anime;
 
+  const showModal = () => {
+    setIsModalOpen(true);
+  };
+
+  const handleOk = () => {
+    setIsModalOpen(false);
+  };
+
+  const handleCancel = () => {
+    setIsModalOpen(false);
+  };
+
   return (
-    <Container id={id}>
-      <Banner img={banner} description='imagem de fundo do dragon ball gt' />
+    <>
+      <Head>
+        <title>Anime view | Detalhes - {title}</title>
+      </Head>
 
-      <Wrapper>
-        <div className='header'>
-          <figure>
-            <img src={img} alt="" />
-          </figure>
+      <Container id={id}>
+        <Banner img={banner} description='imagem de fundo do dragon ball gt' />
 
-          <div className='header-title'>
-            <h2>{title}</h2>
-            <Tags tags={categories} />
-            <StarRating rating={rating} />
+        <Wrapper>
+          <div className='header'>
+            <figure>
+              <img src={img} alt={`imagem do ${title}`} />
+            </figure>
 
-            <span>{popularityRanking ? `${popularityRanking}° Popular ranking` : ''}</span>
-            <span>{episodeCount ? `${episodeCount} Episodes` : ''}</span>
+            <div className='header-title'>
+              <h2>{title}</h2>
+              <Tags tags={categories} />
+              <StarRating rating={rating} />
 
-            <Button type="primary">Watch video</Button>
+              <span>{popularityRanking ? `${popularityRanking}° Popular ranking` : ''}</span>
+              <span>{episodeCount ? `${episodeCount} Episodes` : ''}</span>
+
+              <Button type="primary" onClick={showModal}>Watch video</Button>
+            </div>
           </div>
-        </div>
 
-        <div className='content'>
-          <div className='synopsis'>
-            <h2>synopsis</h2>
-            <p>{description}</p>
+          <div className='content'>
+            <div className='synopsis'>
+              <h2>synopsis</h2>
+              <p>{description}</p>
+            </div>
           </div>
+        </Wrapper>
 
+        <Modal title={title} open={isModalOpen} onOk={handleOk} onCancel={handleCancel} centered footer={false} width='80%'>
           <iframe
             src={`https://www.youtube.com/embed/${youtubeVideoId}`}
             title="YouTube video player"
             allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-            height={180}
-            width={340}
+            height={'500'}
+            width={'100%'}
           >
           </iframe>
-        </div>
-      </Wrapper>
+        </Modal>
 
-    </Container>
+      </Container>
+    </>
   )
 }
 
-export const getServerSideProps: GetServerSideProps = async ({params}) => {
+export const getServerSideProps: GetServerSideProps = async ({ params }) => {
   const id = params?.slug;
 
   if (!id) {
@@ -88,7 +110,7 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
   const responseAnime = responses[0]?.data;
   const responseCategories = responses[1]?.data;
   const responseEpisodes = responses[2]?.data;
-    
+
   const anime = {
     id: responseAnime.data.id,
     title: responseAnime.data.attributes.canonicalTitle,
@@ -109,7 +131,7 @@ export const getServerSideProps: GetServerSideProps = async ({params}) => {
     })),
     categories: responseCategories.data
       .filter((included: any) => responseAnime.data.relationships.categories.data
-      .map((category: any) => category.id).includes(included.id))
+        .map((category: any) => category.id).includes(included.id))
       .map((category: any) => category.attributes.title).slice(0, 3)
   }
 
